@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import background from './assets/background.jpg'; 
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +11,13 @@ const ADMIN = {
 };
 
 export default function Welcome() {
+  // Set a default user for testing if not already set
+  useEffect(() => {
+    if (!localStorage.getItem("currentUser")) {
+      localStorage.setItem("currentUser", JSON.stringify({ firstName: "John", lastName: "Doe" }));
+    }
+  }, []);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showSignup, setShowSignup] = useState(false);
